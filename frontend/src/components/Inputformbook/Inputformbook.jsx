@@ -1,12 +1,13 @@
 import { useRef } from "react"
-import { BASE_URL, Book_POST } from "../../redux-toolkit/API-URL";
+import { Book_POST } from "../../redux-toolkit/API-URL";
 import { useDispatch } from "react-redux";
+import { postData } from "../../redux-toolkit/Slice/bookslice";
 
 
 const Inputformbook = () => {
 
     let title = useRef();
-    let authore = useRef();
+    let author = useRef();
     let description = useRef();
     let price = useRef();
     let rating = useRef();
@@ -17,7 +18,7 @@ const Inputformbook = () => {
     let addbook = () => {
         let newbook = {
             title: title.current.value,
-            authore: authore.current.value,
+            author: author.current.value,
             description: description.current.value,
             price: price.current.value,
             rating: rating.current.value,
@@ -26,7 +27,7 @@ const Inputformbook = () => {
         console.log(newbook);
         dispatch(postData({
             payload: newbook,
-            endpoint:  Book_POST,
+            endpoint: Book_POST,
             dataType: "book",
         }));
     }
@@ -42,7 +43,7 @@ const Inputformbook = () => {
                     </div>
                     <div className="form-group mb-6">
                         <label className="form-label  text-gray-700">Author</label>
-                        <input type='text' name='age' className="form-control w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder=" Author" ref={authore} />
+                        <input type='text' name='age' className="form-control w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder=" Author" ref={author} />
                     </div>
                     <div className="form-group mb-6">
                         <label className="form-label  mb-2 text-gray-700">Description</label>

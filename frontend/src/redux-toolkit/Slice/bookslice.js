@@ -13,15 +13,31 @@ const initialState = {
 export const postData = createAsyncThunk(
     "postData",
     async (data, { rejectWithValue }) => {
-        let { endpoint, payload, dataType } = data
+        let { endpoint, payload, dataType } = data;
+        // console.log(payload, "payload");
         try {
-            const res = await axios.post(BASE_URL + endpoint, payload);
+            let res = await axios.post(BASE_URL + endpoint, payload);
+            console.log(res.data, "res.data");
             return { data: res.data, dataType }
         } catch (error) {
             return rejectWithValue(error.response ? error.response.data : error.message);
         }
     }
 );
+
+//GET DATA
+export const getdata = createAsyncThunk(
+    "getdata",
+    async ({ endpoint, dataType }, { rejectWithValue }) => {
+        try {
+            const res = await axios.get(BASE_URL + endpoint);
+            console.log(res.data.data, "res.data");
+            return { data: res.data.data, dataType };
+        } catch (error) {
+            return rejectWithValue(error.response ? error.response.data : error.message)
+        }
+    }
+)
 
 // Slice
 export const bookSlice = createSlice({
@@ -31,6 +47,7 @@ export const bookSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
+            //post meth
             .addCase(postData.pending, (state) => {
                 state.isLoading = true;
                 state.isError = false;
@@ -49,5 +66,28 @@ export const bookSlice = createSlice({
                         break;
                 }
             })
+
+            //get meth
+            .addCase(getdata.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false;
+            })
+            .addCase(getdata.rejected, (state, action) => {
+                state.isError = action.payload;
+                state.isLoading = false;
+            })
+            .addCase(getdata.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const { data, dataType } = action.payload;
+                switch (dataType) {
+                    case "book": state.book = data;
+                        break;
+                    default:
+                        break;
+                }
+
+            })
     }
 })
+
+export default bookSlice.reducer;

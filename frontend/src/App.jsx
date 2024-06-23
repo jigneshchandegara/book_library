@@ -9,6 +9,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Addbook from './Page/Addbook';
 import Footer from './components/Footer/Footer';
+import { useDispatch } from 'react-redux';
+import { Book_GET } from './redux-toolkit/API-URL';
+import { getdata } from './redux-toolkit/Slice/bookslice';
 
 
 const App = () => {
@@ -28,6 +31,12 @@ const App = () => {
     });
     AOS.refresh();
   }, [])
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getdata({ dataType: "book", endpoint: Book_GET }));
+  },[])
   return (
     <>
       <div className='bg-white dark:bg-gray-900 dark:text-white duration-200'>
@@ -36,7 +45,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/book" element={<Bookshow />} />
-          <Route path="/addbook" element={<Addbook />} /> 
+          <Route path="/addbook" element={<Addbook />} />
         </Routes>
         <Footer />
       </div>
