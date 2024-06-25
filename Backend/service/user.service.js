@@ -17,4 +17,8 @@ let updateuser = (id, body) => {
     return userSchema.findByIdAndUpdate(id, body)
 }
 
-module.exports = { postuser, getuser, deleteuser, updateuser }
+let findusername = (name) => {
+    return userSchema.findOne({name})
+}
+
+module.exports = { postuser, getuser, deleteuser, updateuser, findusername }

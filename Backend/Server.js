@@ -3,8 +3,13 @@ let http = require("http");
 let express = require("express");
 let connectDB = require("./DB/dbconnect");
 let routes = require("./routes");
-let cors = require("cors")
+let cors = require("cors");
+const cookieParser = require("cookie-parser");
 let app = express();
+
+//cookies
+
+app.use(cookieParser())
 
 //cors
 app.use(

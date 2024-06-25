@@ -4,6 +4,8 @@ import { BASE_URL } from "../API-URL";
 
 const initialState = {
     book: [],
+    user: [],
+    login: [],
     isLoading: false,
     isError: false
 };
@@ -61,6 +63,10 @@ export const bookSlice = createSlice({
                 const { dataType, data } = action.payload;
                 switch (dataType) {
                     case "book": state.book = state.book.concat(data.data);
+                        break;
+                    case "user": state.user = state.user.concat(data.data);
+                        break;
+                    case "login": state.login = state.login.concat(data.data);
                         break;
                     default:
                         break;

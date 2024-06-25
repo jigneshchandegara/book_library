@@ -80,7 +80,7 @@ const Testimonial = () => {
                             {testimonialData.map((data) => {
                                 return (
                                     <div className="my-6">
-                                        <div key={data.id} className=" flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-primary/10 relative">
+                                        <div  className=" flex flex-col gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl dark:bg-gray-800 bg-primary/10 relative">
                                             <div>
                                                 <img className="rounded-full w-20 h-20" src={data.img} alt="review" />
                                             </div>
