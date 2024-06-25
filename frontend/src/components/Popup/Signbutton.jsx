@@ -49,8 +49,6 @@ const Signbutton = ({ orderPopup, setOrderPopup }) => {
     }));
     username.current.value = "",
     userpassword.current.value = ""
-
-
   }
 
   return (
